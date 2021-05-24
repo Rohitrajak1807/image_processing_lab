@@ -59,13 +59,13 @@ def generate_model():
     )
     test_datagen = ImageDataGenerator(rescale=1.0 / 255)
     training_set = train_datagen.flow_from_directory(
-        './train',
+        '../res/train',
         target_size=(64, 64),
         batch_size=32,
         class_mode='binary'
     )
     test_set = test_datagen.flow_from_directory(
-        './test',
+        '../res/test',
         target_size=(64, 64),
         batch_size=32,
         class_mode='binary'
@@ -77,15 +77,15 @@ def generate_model():
         validation_data=test_set,
         validation_steps=5000
     )
-    classifier.save('catdog_cmm.h5')
+    classifier.save('../outputs/Assignment4/catdog_cmm.h5')
 
 
 def test_model():
-    model = load_model('./catdog_cmm.h5')
+    model = load_model('../outputs/Assignment4/catdog_cmm.h5')
     cat = np.expand_dims(
         image.img_to_array(
             image.load_img(
-                './test/cats/cat.1.jpg',
+                '../res/test/cats/cat.1.jpg',
                 target_size=(64, 64)
             )
         ),
@@ -94,7 +94,7 @@ def test_model():
     dog = np.expand_dims(
         image.img_to_array(
             image.load_img(
-                './test/dogs/dog.1.jpg',
+                '../res/test/dogs/dog.1.jpg',
                 target_size=(64, 64)
             )
         ),
